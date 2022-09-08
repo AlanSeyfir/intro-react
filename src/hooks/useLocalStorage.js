@@ -25,7 +25,7 @@ const useLocalStorage = (itemName, initialValue) => {
     } catch (error) {
       setError(error);
     }
-  }, [itemName, initialValue]);
+  }); //Adding , [itemName, initialValue] solves my warning
 
   const saveItem = (newTodos) => {
     try {
