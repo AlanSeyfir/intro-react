@@ -1,32 +1,3 @@
-create react app <br>
-jsx > npx create-react-app app-name <br>
-tsx > npx create-react-app app-name --template typescript <br>
-
-run live server <br>
-vite > npm run dev <br>
-react > npm start <br>
-
-use jsx / tsx
-
-✅ create component <br>
-✅ use props parent to child <br>
-✅ use props child to parent <br>
-✅ conditional rendering <br>
-✅ lists
-
-component life cycle
-
-hooks <br>
-
-- ✅ useState <br>
-- ✅ useEffect <br>
-- useRef <br>
-- useCallback <br>
-- ? useContext <br>
-- ? useReducer <br>
-
-This is a really good summary about react (basic concepts) https://www.freecodecamp.org/news/react-interview-questions-and-answers/
-
 ## Why components?
 
 A component is a self-contained, reusable code block that divides the user interface into smaller pieces rather than building the entire UI in a single file.
@@ -413,6 +384,8 @@ Custom Hooks are a JavaScript function that you write to allow you to share logi
 If we return more 3 or more values it better to make it an object instead of an array
 
 <br>
+
+# More hooks
 
 ## Context
 
