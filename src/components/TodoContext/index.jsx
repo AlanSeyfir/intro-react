@@ -13,6 +13,8 @@ function TodoProvider(props) {
     error,
   } = useLocalStorage('TODOS _V1', []);
 
+  const [openModal, setOpenModal] = useState(false);
+
   const [searchValue, setSearchValue] = useState('');
 
   const completedTodos = todos.filter((todo) => !!todo.completed).length;
@@ -29,6 +31,16 @@ function TodoProvider(props) {
       return todoText.includes(searchText);
     });
   }
+
+  const addTodo = (text) => {
+    // const todoIndex = todos.findIndex((todo) => todo.text === text);
+    const newTodos = [...todos];
+    newTodos.push({
+      text,
+      completed: false,
+    });
+    saveTodos(newTodos);
+  };
 
   const completeTodo = (text) => {
     const todoIndex = todos.findIndex((todo) => todo.text === text);
@@ -54,8 +66,11 @@ function TodoProvider(props) {
         searchValue,
         setSearchValue,
         searchedTodos,
+        addTodo,
         completeTodo,
         deleteTodo,
+        openModal,
+        setOpenModal,
       }}
     >
       {props.children}

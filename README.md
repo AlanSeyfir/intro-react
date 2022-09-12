@@ -402,6 +402,11 @@ Supongamos que tienes un componente “bisabuelo” y ese componente quiere darl
 
 ![Image](https://static.platzi.com/media/user_upload/context-0917efb7-ccab-4117-a12c-cf066b2aee91.jpg)
 
+### useContext
+
+Using the useContext hook
+`const { searchValue, setSearchValue } = useContext(TodoContext);`
+
 <br>
 
 ### React portals
