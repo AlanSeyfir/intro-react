@@ -1,4 +1,4 @@
-## Why components?
+## Why components? s
 
 A component is a self-contained, reusable code block that divides the user interface into smaller pieces rather than building the entire UI in a single file.
 
