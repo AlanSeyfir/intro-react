@@ -282,6 +282,8 @@ export default Wrapper;
 
 # Hooks
 
+Guide to hooks: https://simranraj8.medium.com/a-guide-to-react-18-hooks-27bce771a0d3
+
 ## useState
 
 The `useState` Hook is a store that enables the use of state variables in functional components. You can pass the initial state to this function, and it will return a variable containing the current state value (not necessarily the initial state) and another function to update this value.
