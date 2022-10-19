@@ -1,4 +1,4 @@
-## Why components?
+## Why components? s
 
 A component is a self-contained, reusable code block that divides the user interface into smaller pieces rather than building the entire UI in a single file.
 
@@ -257,6 +257,8 @@ export default Wrapper;
 ```
 
 # Hooks
+
+Guide to hooks: https://simranraj8.medium.com/a-guide-to-react-18-hooks-27bce771a0d3
 
 ## useState
 
