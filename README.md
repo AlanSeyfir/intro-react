@@ -262,13 +262,15 @@ export default Wrapper;
 
 The `useState` Hook is a store that enables the use of state variables in functional components. You can pass the initial state to this function, and it will return a variable containing the current state value (not necessarily the initial state) and another function to update this value.
 
+If you stored an object you need to return the previous state it doesn't merge the values `setState((prevState) => return {...prevState, moreInfo})` .
+
 ```jsx
 import React, { useState } from 'react';
 
 const App = () => {
   const [count, setCount] = useState(0);
 
-  return <div>// ...</div>;
+  return <div>{count}</div>;
 };
 ```
 
@@ -318,6 +320,8 @@ console.log('Render (Despues del useEffect)');
 
 The `useMemo()` hook is used in functional components to memoize expensive functions so that they are only called when a set input changes rather than every render.
 
+The first argument of `useMemo` is a function that does the complex calculation you want to memoize, and the second argument is an array of all dependencies for that memoization.
+
 `const result = useMemo(() => expensivesunction(input), [input]);`
 
 This is similar to the `useCallback` hook, which is used to optimize the rendering behavior of your React function components. useMemo is used to memoize expensive functions so that they do not have to be called on every render.
@@ -331,6 +335,10 @@ When we need to do the following, we use useRefs:
 - Adjust the focus, and choose between text and media playback.
 - Work with third-party DOM libraries.
 - Initiate imperative animations
+
+Accessing the DOM elements and persisting values across render without causing re-render
+
+It's like `document.querySelector()`.
 
 ```jsx
 import React, { useEffect, useRef } from 'react';
@@ -352,16 +360,76 @@ const App = () => {
 export default App;
 ```
 
+## useCallback
+
+`useCallback` works nearly identically to `useMemo` since it will cache a result based on an array of dependencies, but `useCallback` is used specifically for caching functions instead of caching values.
+
+Difference
+
+- `useMemo` will call the function passed to it whenever its dependencies change and will return the value of that function call`
+- `useCallback` on the other hand will not call the function passed to it and instead will return a new version of the function passed to it whenever the dependencies change. This means that as long as the dependencies do not change then `useCallback` will return the same function as before which maintains referential equality.
+
+## useReducer
+
+`useReducer` is the best solution in React for handling complex state interactions so let's look at how we can convert a component from `useState` to `useReducer`.
+
+```jsx
+function reducer(count, action) {
+  switch (action.type) {
+    case 'increment':
+      return count + 1
+    default
+      return count
+  }
+}
+
+function Counter() {
+  const [count, dispatch] = useReducer(reducer, 0)
+  return (
+    <>
+      <span>{count}</span>
+      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
+    </>
+  )
+}
+
+```
+
+## Referential Equality
+
+??
+
 ## Custom Hooks
 
 **What are Custom Hooks?** <br>
 Custom Hooks are a JavaScript function that you write to allow you to share logic across multiple components, which was previously impossible with React components.
 
-If we return more 3 or more values it better to make it an object instead of an array
+If we return more 3 or more values it better to make it an object instead of an array.
+
+**_useLocalStorage Hook_**
+
+```jsx
+export default function useLocalStorage(key, initialValue) {
+  const [value, setValue] = useState(() => {
+    const jsonValue = localStorage.getItem(key);
+    if (jsonValue != null) return JSON.parse(jsonValue);
+    return initialValue;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+
+  return [value, setValue];
+}
+```
+
+### useContext
+
+Using the useContext hook
+`const { searchValue, setSearchValue } = useContext(TodoContext);`
 
 <br>
-
-# More hooks
 
 ## Context
 
@@ -377,11 +445,6 @@ Props drilling es un término para describir cuando pasas props en varios nivele
 Supongamos que tienes un componente “bisabuelo” y ese componente quiere darle un regalo 🎁 (props) a su bisnieto, el componente bisabuelo tiene la opción de darle ese regalo al abuelo, para que se lo de al hijo, y este hijo al nieto. O también tiene la opción de mejor entregárselo él directamente, sin intermediaciones innecesarias, que ahí es donde entraría React Context.
 
 ![Image](https://static.platzi.com/media/user_upload/context-0917efb7-ccab-4117-a12c-cf066b2aee91.jpg)
-
-### useContext
-
-Using the useContext hook
-`const { searchValue, setSearchValue } = useContext(TodoContext);`
 
 <br>
 
@@ -430,6 +493,12 @@ nameInputRef.current.value = ''; //Reset the name
 
 ### Controlled and uncontrolled components
 
+???
+
 ```
   //
+```
+
+```
+
 ```
